@@ -2,7 +2,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { CustomOutlet } from 'components/Outlet/Outlet';
 import { Details } from 'pages/Details/Details';
-import { CustomForm } from 'pages/Form/Form';
+import { DetailsForm } from 'pages/Form/Details/Details';
+import { OverviewForm } from 'pages/Form/Overview/Overview';
 
 export function Router() {
   return (
@@ -18,8 +19,16 @@ export function Router() {
           />
           <Route
             path="/edit"
-            element={<CustomForm />}
-          />
+          >
+            <Route
+              path="details"
+              element={<DetailsForm />}
+            />
+            <Route
+              path="overview"
+              element={<OverviewForm />}
+            />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

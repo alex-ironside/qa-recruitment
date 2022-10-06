@@ -26,6 +26,7 @@ export const LevelsSelector = memo(({ items }: Props) => (
         name, label, value, onChange,
       }) => (
         <FormControl
+          fullWidth
           key={label}
         >
           <InputLabel id="select-label">{label}</InputLabel>
@@ -34,14 +35,12 @@ export const LevelsSelector = memo(({ items }: Props) => (
             value={value}
             onChange={onChange}
             label={label}
+            fullWidth
           >
             {Object.entries(Level)
               .filter(([key]) => Number.isNaN(Number(key)))
               .map(([key, levelValue]) => (
-                <MenuItem
-                  key={levelValue}
-                  value={levelValue}
-                >
+                <MenuItem value={levelValue}>
                   {key}
                 </MenuItem>
               ))}

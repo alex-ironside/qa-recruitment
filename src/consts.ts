@@ -15,3 +15,5 @@ export const LEVEL_FIELDS = [
     onChange: 'setSeverity',
   },
 ];
+
+export const REQUEST_URL = 'http://localhost:4000';

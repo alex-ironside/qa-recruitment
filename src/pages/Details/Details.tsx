@@ -1,8 +1,19 @@
 import { Stack, Typography } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
+
+import { REQUEST_URL } from 'consts';
 
 import { DetailsItem } from './components/Item/Item';
 
 export function Details() {
+  const { data, isLoading } = useQuery(
+    ['details'],
+    () => fetch(REQUEST_URL).then((r) => r.json()),
+  );
+
+  if (isLoading) {
+    return <>loading...</>;
+  }
   return (
     <Stack
       alignItems="center"
@@ -19,34 +30,34 @@ export function Details() {
         alignContent="center"
       >
         <DetailsItem title="title">
-          title
+          {data?.title}
         </DetailsItem>
         <DetailsItem title="category">
-          category
+          {data?.category}
         </DetailsItem>
         <DetailsItem title="asset">
-          asset
+          {data?.asset}
         </DetailsItem>
         <DetailsItem title="comment">
-          comment
+          {data?.comment}
         </DetailsItem>
         <DetailsItem title="risk">
-          risk
+          {data?.risk}
         </DetailsItem>
         <DetailsItem title="quantity">
-          quantity
+          {data?.quantity}
         </DetailsItem>
         <DetailsItem title="deadline">
-          deadline
+          <>{data?.deadline}</>
         </DetailsItem>
         <DetailsItem title="Impact">
-          Impact
+          {data?.impact}
         </DetailsItem>
         <DetailsItem title="Execution Probability">
-          Execution Probability
+          {data?.execProbability}
         </DetailsItem>
         <DetailsItem title="Severity">
-          Severity
+          {data?.severity}
         </DetailsItem>
       </Stack>
     </Stack>

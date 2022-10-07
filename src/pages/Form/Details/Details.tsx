@@ -3,36 +3,30 @@ import { useMemo } from 'react';
 import type { SelectChangeEvent } from '@mui/material';
 import { Button } from '@mui/material';
 import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
 import { useFormik } from 'formik';
 
 import { LevelsSelector } from 'components/LevelsSelector/LevelsSelector';
-import { LEVEL_FIELDS } from 'consts';
+import { LEVEL_FIELDS, REQUEST_URL } from 'consts';
 import { CustomDatePicker } from 'pages/Form/components/CustomDatePicker/CustomDatePicker';
 import { CustomTextField } from 'pages/Form/components/CustomTextField/CustomTextField';
+import type { IDetails } from 'pages/types';
 
-interface FormTypes {
-  comment: string;
-  risk: string;
-  quantity: number;
-  deadline?: Date;
-  impact: number;
-  execProbability: number;
-  severity: number;
-}
+type FormType = Pick<IDetails, 'comment' | 'risk' | 'quantity' | 'deadline' | 'execProbability' | 'severity' | 'impact'>;
 
 export function DetailsForm() {
-  const { mutate } = useMutation([''], (values: FormTypes) => {
-    console.log(values);
-    return new Promise(() => {});
-  });
+  const { mutate } = useMutation(
+    ['edit/details'],
+    (values: FormType) => axios.post(`${REQUEST_URL}/details`, values),
+  );
 
-  const submit = (values: FormTypes) => {
+  const submit = (values: FormType) => {
     mutate(values);
   };
 
   const {
     values, handleChange, setFieldValue, handleSubmit,
-  } = useFormik<FormTypes>({
+  } = useFormik<FormType>({
     initialValues: {
       impact: 0,
       execProbability: 0,

@@ -1,4 +1,5 @@
 import { Container, Paper } from '@mui/material';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Outlet } from 'react-router-dom';
 
 import { Navigation } from 'components/Navigation/Navigation';
@@ -10,6 +11,7 @@ export function CustomOutlet() {
         <Navigation />
         <Outlet />
       </Paper>
+      <ReactQueryDevtools initialIsOpen={false} />
     </Container>
   );
 }

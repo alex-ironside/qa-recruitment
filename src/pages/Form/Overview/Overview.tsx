@@ -1,28 +1,31 @@
-import { useCallback } from 'react';
-
 import { Box, Button } from '@mui/material';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
 import { useFormik } from 'formik';
 
+import { REQUEST_URL } from 'consts';
 import { CustomTextField } from 'pages/Form/components/CustomTextField/CustomTextField';
+import type { IDetails } from 'pages/types';
 
-interface FormTypes {
-  title: string;
-  category: string;
-  asset: string;
-}
+type FormType = Pick<IDetails, 'title' | 'asset' | 'category'>;
 
 export function OverviewForm() {
-  const handleSubmit = useCallback(() => {
+  const { mutate } = useMutation(
+    ['edit/details'],
+    (values: FormType) => axios.post(`${REQUEST_URL}/overview`, values),
+  );
 
-  }, []);
+  const submit = (values: FormType) => {
+    mutate(values);
+  };
 
-  const { values, handleChange } = useFormik<FormTypes>({
+  const { values, handleChange, handleSubmit } = useFormik<FormType>({
     initialValues: {
       title: '',
       asset: '',
       category: '',
     },
-    onSubmit: handleSubmit,
+    onSubmit: submit,
   });
 
   return (
@@ -45,7 +48,7 @@ export function OverviewForm() {
         value={values.asset}
         onChange={handleChange}
       />
-      <Button onClick={handleSubmit}>Save</Button>
+      <Button onClick={() => handleSubmit()}>Save</Button>
     </Box>
   );
 }

@@ -13,3 +13,9 @@ export enum LevelText {
   Critical = 'Critical',
 }
 
+export const levelsMap: Record<Level, LevelText> = {
+  [Level.Low]: LevelText.Low,
+  [Level.Medium]: LevelText.Medium,
+  [Level.High]: LevelText.High,
+  [Level.Critical]: LevelText.Critical,
+};

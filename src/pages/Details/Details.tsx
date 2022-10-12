@@ -2,6 +2,7 @@ import { Stack, Typography } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 
 import { REQUEST_URL } from 'consts';
+import { levelsMap, LevelText } from 'enums';
 
 import { DetailsItem } from './components/Item/Item';
 
@@ -51,13 +52,13 @@ export function Details() {
           <>{data?.deadline}</>
         </DetailsItem>
         <DetailsItem title="Impact">
-          {data?.impact}
+          {levelsMap[data?.execProbability]}
         </DetailsItem>
         <DetailsItem title="Execution Probability">
-          {data?.execProbability}
+          {levelsMap[data?.impact]}
         </DetailsItem>
         <DetailsItem title="Severity">
-          {data?.severity}
+          {levelsMap[data?.severity]}
         </DetailsItem>
       </Stack>
     </Stack>

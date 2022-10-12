@@ -26,6 +26,9 @@ app.post('/overview', (req: Request, res: Response) => {
   if (!isEmpty(rest)) {
     res.status(400).send('Wrong input');
   }
+  if (Math.floor(Math.random() * 10) % 10 < 2) {
+    res.status(400).send('Server error');
+  }
   data = {
     ...data,
     title,
@@ -47,7 +50,10 @@ app.post('/details', (req: Request, res: Response) => {
     ...rest
   } = req.body;
   if (!isEmpty(rest)) {
-    res.status(400).send('Wrong input');
+    res.status(400).send('Server error');
+  }
+  if (Math.floor(Math.random() * 10) % 10 < 1) {
+    res.status(500).send('Wrong input');
   }
   data = {
     ...data,

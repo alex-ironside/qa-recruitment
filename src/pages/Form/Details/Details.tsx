@@ -11,6 +11,7 @@ import { LEVEL_FIELDS, REQUEST_URL } from 'consts';
 import { CustomDatePicker } from 'pages/Form/components/CustomDatePicker/CustomDatePicker';
 import { CustomTextField } from 'pages/Form/components/CustomTextField/CustomTextField';
 import type { IDetails } from 'pages/types';
+import { requestWrapper } from 'utils/requestWrapper';
 
 type FormType = Pick<IDetails, 'comment' | 'risk' | 'quantity' | 'deadline' | 'execProbability' | 'severity' | 'impact'>;
 
@@ -21,7 +22,8 @@ export function DetailsForm() {
   );
 
   const submit = (values: FormType) => {
-    mutate(values);
+    requestWrapper(mutate(values), 3);
+    requestWrapper(mutate({ ...values, execProbability: values.severity }), 3);
   };
 
   const {
@@ -72,7 +74,7 @@ export function DetailsForm() {
         type="number"
       />
       <CustomDatePicker
-        onChange={handleChange}
+        onChange={(value) => { setFieldValue('deadline', value); }}
         label="deadline"
         value={values.deadline}
       />

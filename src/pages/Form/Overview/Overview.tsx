@@ -6,7 +6,6 @@ import { useFormik } from 'formik';
 import { REQUEST_URL } from 'consts';
 import { CustomTextField } from 'pages/Form/components/CustomTextField/CustomTextField';
 import type { IDetails } from 'pages/types';
-import { requestWrapper } from 'utils/requestWrapper';
 
 type FormType = Pick<IDetails, 'title' | 'asset' | 'category'>;
 
@@ -17,7 +16,7 @@ export function OverviewForm() {
   );
 
   const submit = (values: FormType) => {
-    requestWrapper(mutate(values), 2);
+    mutate(values);
   };
 
   const { values, handleChange, handleSubmit } = useFormik<FormType>({

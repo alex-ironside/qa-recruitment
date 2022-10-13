@@ -26,7 +26,7 @@ app.post('/overview', (req: Request, res: Response) => {
   if (!isEmpty(rest)) {
     res.status(400).send('Wrong input');
   }
-  if (Math.floor(Math.random() * 10) % 10 < 2) {
+  if (asset) {
     res.status(400).send('Server error');
   }
   data = {
@@ -52,7 +52,7 @@ app.post('/details', (req: Request, res: Response) => {
   if (!isEmpty(rest)) {
     res.status(400).send('Server error');
   }
-  if (Math.floor(Math.random() * 10) % 10 < 1) {
+  if (deadline > Date.now() + 4 * 60 * 60 * 24 * 1000) {
     res.status(500).send('Wrong input');
   }
   data = {

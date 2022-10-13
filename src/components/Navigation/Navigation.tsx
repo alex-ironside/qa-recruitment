@@ -8,8 +8,8 @@ import { useNavigate } from 'react-router-dom';
 export function Navigation() {
   const navigate = useNavigate();
   const goToDisplayDetails = useCallback(() => navigate('/'), [navigate]);
-  const goToEditDetails = useCallback(() => navigate('/edit/details'), [navigate]);
-  const goToEditOverview = useCallback(() => navigate('/edit/overview'), [navigate]);
+  const goToEditDetails = useCallback(() => navigate('/edit/overview'), [navigate]);
+  const goToEditOverview = useCallback(() => navigate('/edit/details'), [navigate]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
